@@ -49,7 +49,7 @@ class HashTable:
         Implement this.
         """
         # load factor is defined as the number of items in the table divided by capacity
-        self.size / self.capacity
+        return self.size / self.capacity
 
     def fnv1(self, key):
         """
@@ -58,7 +58,16 @@ class HashTable:
         Implement this, and/or DJB2.
         """
 
-        # Your code here
+        FNV_Prime = 1099511628211
+        FNV_offset_basis = 14695981039346656037
+
+        hash = FNV_offset_basis
+
+        for char in key:
+            hash = hash * FNV_Prime
+            hash = hash ^ ord(char)
+
+        return hash
 
 
     def djb2(self, key):
