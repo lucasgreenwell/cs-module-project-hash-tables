@@ -39,6 +39,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        return len(self.storage)
 
 
     def get_load_factor(self):
@@ -47,8 +48,8 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
+        # load factor is defined as the number of items in the table divided by capacity
+        self.size / self.capacity
 
     def fnv1(self, key):
         """
@@ -66,7 +67,11 @@ class HashTable:
 
         Implement this, and/or FNV-1.
         """
-        # Your code here
+        hash = 5381
+
+        for c in key:
+            hash = (hash * 33) + ord(c)
+        return hash
 
 
     def hash_index(self, key):
