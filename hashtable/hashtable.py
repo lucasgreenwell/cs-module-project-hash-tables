@@ -57,7 +57,7 @@ class HashTable:
 
         Implement this, and/or DJB2.
         """
-
+        #high number prime shit that I need to take a cryptography class for it to make sense
         FNV_Prime = 1099511628211
         FNV_offset_basis = 14695981039346656037
 
@@ -99,7 +99,14 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        #find the index in the storage list that we want
+        storage_index = self.hash_index(key)
+
+        if not self.storage[storage_index]:
+            #create a new entry and put that shit in. Update size attr
+            self.storage[storage_index] = HashTableEntry(key, value)
+            self.size += 1
+
 
 
     def delete(self, key):
@@ -121,10 +128,26 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        #set up the index you trying to find
+        storage_index = self.hash_index(key)
+
+        #if nothings there return None
+        if self.storage[storage_index] is None:
+            return None
+        #if the thing there is just one key-value pair, return the value
+        if self.storage[storage_index].key is key:
+            return self.storage[storage_index].value
+        #otherwise it's a linked list that needs iterating
+        else:
+            current = self.storage[storage_index]
+            while current.next is not None:
+                current = current.next
+                if current.key is key:
+                    return current.value
+            return None
 
 
-    def resize(self, new_capacity):
+def resize(self, new_capacity):
         """
         Changes the capacity of the hash table and
         rehashes all key/value pairs.
