@@ -76,6 +76,7 @@ class HashTable:
 
         Implement this, and/or FNV-1.
         """
+        #look onto bitwise operators
         hash = 5381
 
         for c in key:
@@ -103,9 +104,23 @@ class HashTable:
         storage_index = self.hash_index(key)
 
         if not self.storage[storage_index]:
-            #create a new entry and put that shit in. Update size attr
+            #create a new entry and put that in. Update size attr
             self.storage[storage_index] = HashTableEntry(key, value)
             self.size += 1
+        #otherwise it's gonna need some space
+        else:
+            current_entry = self.storage[storage_index]
+            #iterating through the list at that index
+            while current_entry.next is not None:
+                #if this is the key then replace it's value
+                if current_entry.key == key:
+                    current_entry.value = value
+                    break
+                current_entry = current_entry.next
+            #we looked through everyhthing and didn't find the key so just add a new thing
+            current_entry.next = HashTableEntry(key, value)
+
+
 
 
 
@@ -139,11 +154,14 @@ class HashTable:
             return self.storage[storage_index].value
         #otherwise it's a linked list that needs iterating
         else:
+            #iterate through it
             current = self.storage[storage_index]
             while current.next is not None:
                 current = current.next
+                #and if you find the thing you're looking for then return it
                 if current.key is key:
                     return current.value
+            #but if you go through the whole list and it's not there
             return None
 
 
