@@ -70,6 +70,7 @@ class TestHashTable(unittest.TestCase):
         return_value = ht.get("key-1")
         self.assertTrue(return_value == "new-val-1")
         return_value = ht.get("key-2")
+        print(return_value)
         self.assertTrue(return_value == "new-val-2")
         return_value = ht.get("key-3")
         self.assertTrue(return_value == "new-val-3")

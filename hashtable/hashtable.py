@@ -110,15 +110,15 @@ class HashTable:
         #otherwise it's gonna need some space
         else:
             current_entry = self.storage[storage_index]
-            #iterating through the list at that index
-            while current_entry.next is not None:
-                #if this is the key then replace it's value
-                if current_entry.key == key:
-                    current_entry.value = value
-                    break
+            #iterating through the list until you get to the end of the list or the entry with the same key
+            while current_entry.next is not None and current_entry.key is not key:
                 current_entry = current_entry.next
             #we looked through everyhthing and didn't find the key so just add a new thing
-            current_entry.next = HashTableEntry(key, value)
+            if current_entry.key is key:
+                current_entry.value = value
+            else:
+                current_entry.next = HashTableEntry(key, value)
+                self.size += 1
 
 
 
@@ -147,10 +147,10 @@ class HashTable:
         storage_index = self.hash_index(key)
 
         #if nothings there return None
-        if self.storage[storage_index] is None:
+        if self.storage[storage_index] == None:
             return None
         #if the thing there is just one key-value pair, return the value
-        if self.storage[storage_index].key is key:
+        if self.storage[storage_index].key == key:
             return self.storage[storage_index].value
         #otherwise it's a linked list that needs iterating
         else:
