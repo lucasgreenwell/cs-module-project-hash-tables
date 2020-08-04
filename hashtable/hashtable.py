@@ -121,9 +121,6 @@ class HashTable:
                 self.size += 1
 
 
-
-
-
     def delete(self, key):
         """
         Remove the value stored with the given key.
@@ -132,7 +129,30 @@ class HashTable:
 
         Implement this.
         """
+        #lol holy crap i worked so much harder on this than I needed to
+        self.put(key,None)
         # Your code here
+        # if self.get(key) is None:
+        #     return "That ain't in there anywho"
+        #
+        # # find the index in the storage list that we want
+        # storage_index = self.hash_index(key)
+        # current_entry = self.storage[storage_index]
+        # if current_entry.next is None:
+        #     current_entry.key = None
+        #     current_entry.value = None
+        # else:
+        #     print("anything")
+        #     prev_entry = current_entry
+        #     while current_entry.key is not key:
+        #         prev_entry = current_entry
+        #         current_entry = current_entry.next
+        #         print(prev_entry, current_entry)
+        #     prev_entry.next = current_entry.next
+        #     current_entry.next = None
+        #     current_entry.key = None
+        #     current_entry.value = None
+
 
 
     def get(self, key):
