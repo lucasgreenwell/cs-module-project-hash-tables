@@ -121,6 +121,7 @@ class HashTable:
                 self.size += 1
 
 
+
     def delete(self, key):
         """
         Remove the value stored with the given key.
@@ -130,6 +131,8 @@ class HashTable:
         Implement this.
         """
         #lol holy crap i worked so much harder on this than I needed to
+        if self.get(key) is None:
+            return "That ain't in there anywho"
         self.put(key,None)
         # Your code here
         # if self.get(key) is None:
@@ -185,15 +188,37 @@ class HashTable:
             return None
 
 
-def resize(self, new_capacity):
-        """
-        Changes the capacity of the hash table and
-        rehashes all key/value pairs.
+    def call_resize_appropriately(self):
+        if self.get_load_factor() >= 0.7:
+            self.resize(2 * self.size)
+        if self.get_load_factor() <= 0.2:
+            self.resize(self.size // 2)
 
-        Implement this.
-        """
-        # Your code here
+    def resize(self, new_capacity):
+            """
+            Changes the capacity of the hash table and
+            rehashes all key/value pairs.
 
+            Implement this.
+            """
+            # Your code here
+            #takes the old storage
+            old_storage = self.storage
+            #makes a new storage
+            self.storage = [None] * new_capacity
+            #sets new cpaacity based on parameter
+            self.capacity = new_capacity
+            #loop through the old storage array
+            for list_of_entries in old_storage:
+                current_entry = list_of_entries
+                #loop through each linked list of entries
+                if current_entry.next is None:
+                    self.put(current_entry.key, current_entry.value)
+                while current_entry.next is not None:
+                    #put it back in
+                    self.put(current_entry.key, current_entry.value)
+                    current_entry = current_entry.next
+                self.put(current_entry.key, current_entry.value)
 
 
 if __name__ == "__main__":
