@@ -2,15 +2,13 @@ def word_count(s):
     # Your code here
     if len(s) < 1:
         return {}
+
+    characters_to_ignore = '" : ; , . - + = / \ | [ ] { } ( ) * ^ &'.split(" ")
+
+    for character in characters_to_ignore:
+        s = s.replace(character, "")
+
     words = s.split()
-    characters_remove = ['"', ':', ';', ',', '.', '-', '+', '=', '/',  '|', '[', ']', '{', '}', '(', ')', '*', '^', '&']
-    for removal in characters_remove:
-        for word in words:
-            if removal in word:
-                word.replace(())
-                word = "".join(chars)
-
-
     words = [word.lower() for word in words]
     word_counts = {}
     for word in words:
