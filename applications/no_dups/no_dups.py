@@ -1,5 +1,20 @@
 def no_dups(s):
-    # Your code here
+    words = s
+    res = s
+    if ' ' in s:
+        print('anything')
+        words = s.split()
+        words_seen = {}
+        res = ''
+        for word in words:
+            if word in words_seen:
+                continue
+            words_seen[word] = word
+            res = res + ' ' + word
+        if len(words_seen) < 2:
+            res = res.strip(' ')
+        res = res.lstrip(' ')
+    return res
 
 
 
